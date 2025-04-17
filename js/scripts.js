@@ -33,6 +33,37 @@ document.addEventListener('DOMContentLoaded', () => {
         link.click();
     });
 
+
+    const emailButton = document.getElementById('send-email');
+
+    emailButton?.addEventListener('click', async () => {
+        const image = canvas?.toDataURL('image/png');
+        const email = document.getElementById('email')?.value;
+
+        if (email && image) {
+            try {
+                const response = await fetch('http://localhost:3000/send-email', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, image })
+                });
+
+                if (response.ok) {
+                    alert('Email sent successfully!');
+                } else {
+                    alert('Failed to send email. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error sending email:', error);
+                alert('An error occurred. Please try again.');
+            }
+        } else {
+            alert('Email address or chart image is missing.');
+        }
+    });
+
     let barChartInstance = null;
 
     const chartTab = document.getElementById('chart-tab');

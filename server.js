@@ -2,6 +2,10 @@ import express from 'express';
 import nodemailer from 'nodemailer';
 import bodyParser from 'body-parser';
 import cors from 'cors';
+import dotenv from 'dotenv';
+
+dotenv.config(); // Load environment variables
+
 const app = express();
 const PORT = 3000;
 
@@ -16,8 +20,8 @@ const transporter = nodemailer.createTransport({
     host: 'smtp.resend.com', // Resend's SMTP host
     port: 587, // Resend's SMTP port
     auth: {
-        user: 'resend', // Replace with your Resend SMTP username
-        pass: 'your-resend-password'  // Replace with your Resend SMTP password
+        user: process.env.SMTP_USER, // Replace with your Resend SMTP username
+        pass: process.env.SMTP_PASS  // Replace with your Resend SMTP password
     }
 });
 

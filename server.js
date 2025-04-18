@@ -15,7 +15,6 @@ app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
 
 app.use(cors());
 
-
 const transporter = nodemailer.createTransport({
     host: 'smtp.resend.com', // Resend's SMTP host
     port: 587, // Resend's SMTP port

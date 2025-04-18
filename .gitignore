@@ -35,3 +35,6 @@ Thumbs.db
 # Miscellaneous
 *.bak
 *.tmp
+
+# Python virtual environment
+.venv

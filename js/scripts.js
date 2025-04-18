@@ -12,15 +12,26 @@ const getMonthlyData = () => {
     });
 };
 
+/**
+ * Callback function to handle changes in the username input field.
+ * Validates the username against a regex pattern and updates the input field's border color
+ * to indicate whether the username is valid or not.
+ *
+ * @param {Object} event - The event object triggered by the input field.
+ * @param {EventTarget} event.target - The target element of the event (input field).
+ */
+const usernameInputCallback = ({ target }) => {
+    const username = target.value;
+    console.log(`Username changed to: ${username}`);
+    const usernameRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
+
+    target.style.border = usernameRegex.test(username) ? '2px solid green' : '2px solid red';
+};
+
 document.addEventListener('DOMContentLoaded', () => {
     const usernameInput = document.getElementById('username');
-    usernameInput?.addEventListener('input', ({ target }) => {
-        const username = target.value;
-        console.log(`Username changed to: ${username}`);
-        const usernameRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
+    usernameInput?.addEventListener('input', usernameInputCallback);
 
-        target.style.border = usernameRegex.test(username) ? '2px solid green' : '2px solid red';
-    });
 
     const downloadButton = document.getElementById('download-btn');
     const canvas = document.getElementById('barChart');
